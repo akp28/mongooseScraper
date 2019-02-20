@@ -54,7 +54,7 @@ app.get("/scrape", function(req, res) {
         .children("a")
         .text();
       console.log
-      result.link = "https://abcnews.go.com"+$(this)
+      result.link = $(this)
         .children("a")
         .attr("href");
 
