@@ -3,11 +3,10 @@ $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + $.trim(data[i].title) + "<br />" + data[i].link + "</p>");
-       $("#articles").append('<p><a href='+data[i].link + '>'+ $.trim(data[i].title) + '</a></p>');
-    // <p><a href='https://www.google.com'>Google</a></p>
-    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + $.trim(data[i].title) + "<br />", "<a href='https://abcnews.go.com/'"+ data[i].link + "</a></p>");
-    
+    $("#articles").append(
+      // "<div class='col-sm-4' style='margin-bottom:60px;'><div class='card'><div class='card-body'><a class='title-link' href='" + data[i].link +"'><h5>" + $.trim(data[i].title) + "</h5></a><hr><p class='card-text'>" + data[i].snippet + "</p><button data-id='" + data[i]._id + "' class='btn-note btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#myModal' style='margin-right:10px;'>Note</button><button id='btn-save' data-id='" + data[i]._id + "' class='btn btn-outline-primary btn-sm'>Save Article</button></div></div></div>"
+      "<div class='col-sm-4' style='margin-bottom:60px;'><div class='card'><div class='card-body'><a class='title-link' href='" + data[i].link +"'><h5>" + $.trim(data[i].title) + "</p><button data-id='" + data[i]._id + "' class='btn-note btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#myModal' style='margin-right:10px;'>Note</button><button id='btn-save' data-id='" + data[i]._id + "' class='btn btn-outline-primary btn-sm'>Save Article</button></div></div></div>"
+      );
   }
 });
 
@@ -46,31 +45,31 @@ $(document).on("click", "p", function() {
     });
 });
 
-// When you click the savenote button
-$(document).on("click", "#savenote", function() {
-  // Grab the id associated with the article from the submit button
-  var thisId = $(this).attr("data-id");
+// This need to be revisted .
+// $(document).on("click", "#savenote", function() {
+//   // Grab the id associated with the article from the submit button
+//   var thisId = $(this).attr("data-id");
 
-  // Run a POST request to change the note, using what's entered in the inputs
-  $.ajax({
-    method: "POST",
-    url: "/articles/" + thisId,
-    data: {
-      // Value taken from title input
-      title: $("#titleinput").val(),
-      // Value taken from note textarea
-      body: $("#bodyinput").val()
-    }
-  })
-    // With that done
-    .then(function(data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-      $("#notes").empty();
-    });
+//   // Run a POST request to change the note, using what's entered in the inputs
+//   $.ajax({
+//     method: "POST",
+//     url: "/articles/" + thisId,
+//     data: {
+//       // Value taken from title input
+//       title: $("#titleinput").val(),
+//       // Value taken from note textarea
+//       body: $("#bodyinput").val()
+//     }
+//   })
+//     // With that done
+//     .then(function(data) {
+//       // Log the response
+//       console.log(data);
+//       // Empty the notes section
+//       $("#notes").empty();
+//     });
 
-  // Also, remove the values entered in the input and textarea for note entry
-  $("#titleinput").val("");
-  $("#bodyinput").val("");
-});
+//   // Also, remove the values entered in the input and textarea for note entry
+//   $("#titleinput").val("");
+//   $("#bodyinput").val("");
+// });
